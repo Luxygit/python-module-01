@@ -1,5 +1,6 @@
 
 def ft_garden_intro() -> None:
+    """function that initializes values and displays them"""
     name = "Diego"
     height = 175
     age = 35
