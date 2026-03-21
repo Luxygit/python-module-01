@@ -63,7 +63,7 @@ class GardenManager:
     def __init__(self, owner: str) -> None:
         """initialising manager for one owner"""
         self.owner = owner
-        self.plants = []
+        self.plants: list[Plant] = []
         self.total_growth = 0
         self.p_count = 0
         self.reg_count = 0
@@ -92,13 +92,13 @@ class GardenManager:
             self.total_growth += 1
 
     @classmethod
-    def create_garden_network(cls, names: list) -> list:
+    def create_garden_network(cls, names: list[str]) -> list["GardenManager"]:
         """
         method to create multiple managers at once
         grabs names from a list and adds them to the network
         through the GardenManager.owner
         """
-        network = []
+        network: list[GardenManager] = []
         for name in names:
             new_garden = cls(name)
             network = network + [new_garden]
