@@ -6,15 +6,15 @@ to streamline the plant creation
 
 class Plant:
     """Single plant construct"""
-    def __init__(self, name: str, height: int, age: int) -> None:
+    def __init__(self, name: str, cms: int, days: int) -> None:
         """Initialising plant instance"""
         self.name = name
-        self.height = height
-        self.age = age
+        self.cms = cms
+        self.days = days
 
-    def display(self) -> None:
-        """Display plant info method"""
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+    def show(self) -> str:
+        """returns plant info method"""
+        return f"{self.name}: {self.cms}cm, {self.days} days old"
 
 
 def main() -> None:
@@ -23,9 +23,9 @@ def main() -> None:
     rose = Plant("Rose", 25, 30)
     sunflower = Plant("Sunflower", 80, 45)
     cactus = Plant("Cactus", 15, 120)
-    rose.display()
-    sunflower.display()
-    cactus.display()
+    print(f"{rose.show()}")
+    print(f"{sunflower.show()}")
+    print(f"{cactus.show()}")
 
 
 if __name__ == "__main__":

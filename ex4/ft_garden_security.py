@@ -1,55 +1,57 @@
-"""This subject is about data validation and conditionals"""
+"""This subject is about data validation and encapsulation"""
 
 
-class SecurePlant:
-    def __init__(self, name: str, height: int, age: int) -> None:
-        """Creating individual instance values and methods"""
+class Plant:
+    """secure plant class validating data"""
+    def __init__(self, name: str, height: float, age: int) -> None:
+        """initialising with defaults in case of invalid inputs"""
         self.name = name
-        self.height = height
-        self.age = age
+        self._height = 0.0
+        self._age = 0
+        self.set_height(height)
+        self.set_age(age)
 
-    def get_info(self):
-        """displays last valid values"""
-        print(f"\nCurrent plant: {self.name}"
-              f" ({self.height}cm, {self.age} days)")
-
-    def set_height(self, height: int) -> None:
-        """updates height value or displays errork"""
+    def set_height(self, height: float) -> None:
+        """updates height value or displays error"""
         if height >= 0:
-            self.height = height
-            self.get_height()
+            self._height = height
         else:
-            print(f"\nInvalid operation attempted: height {height} [REJECTED]")
-            print("Security: Negative height rejected")
+            print(f"{self.name}: Error, height can't be negative")
+            print("Height update rejected")
 
     def set_age(self, age: int) -> None:
         """updates age value or displays error"""
         if age >= 0:
-            self.age = age
-            self.get_age()
+            self._age = age
         else:
-            print(f"\nInvalid operation attempted: age {age} [REJECTED]")
-            print("Security: Negative age rejected")
+            print(f"{self.name}: Error, age can't be negative")
+            print("Age update rejected")
 
-    def get_height(self) -> None:
-        """displays validated height"""
-        if self.height is not None:
-            print(f"Height Updated: {self.height}cm [OK]")
+    def get_height(self) -> float:
+        """returns validated height"""
+        return self._height
 
-    def get_age(self) -> None:
-        """displays validated age"""
-        if self.age is not None:
-            print(f"Age Updated: {self.age} days [OK]")
+    def get_age(self) -> int:
+        """returns validated age"""
+        return self._age
+
+    def show(self) -> str:
+        """returns the last valid values"""
+        return f"{self.name}: {round(self._height, 1)}cm, {self._age} days old"
 
 
 def main() -> None:
     """initializes object and then tries to modify values"""
-    rose = SecurePlant("Rose", 4, 30)
     print("=== Garden Security System ===")
-    print(f"Plant created: {rose.name}")
+    rose = Plant("Rose", 15.0, 10)
+    print(f"Plant created: {rose.show()}\n")
+    rose.set_height(25.0)
+    print(f"Height updated: {round(rose.get_height())}cm")
+    rose.set_age(30)
+    print(f"Age updated: {rose.get_age()} days\n")
     rose.set_height(-10)
     rose.set_age(-5)
-    rose.get_info()
+    print(f"\nCurrent state: {rose.show()}")
 
 
 if __name__ == "__main__":
